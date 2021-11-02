@@ -3,10 +3,13 @@ import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 import axios from "axios";
+import {createStore, useStore} from "react-hookstore";
 
+createStore("connectionTree", []);
 export const Session = () => {
 
-    const [connectionTree, setConnectionTree] = useState([]);
+    const [connectionTree, setConnectionTree] = useStore("connectionTree");
+
 
     const datt = [
                 {
@@ -145,7 +148,6 @@ export const Session = () => {
                         Buffer.from(`${'guacadmin'}:${'guacadmin'}`, 'binary').toString('base64'),
                 }
         }).then(function (response) {
-                console.log(response,'RESSSSS');
                 if(response.status===200){
                     localStorage.setItem('token',response.data.authToken)
                     localStorage.setItem('dataSource',response.data.dataSource)
@@ -159,7 +161,6 @@ export const Session = () => {
                             'token': response.data.authToken
                         }
                     }).then(function (response) {
-                        console.log(response,'SESS');
                         if(response.status===200 && response.data){
                             treList(response.data);
                         }
@@ -220,7 +221,6 @@ export const Session = () => {
             });
         }
         setConnectionTree(treeNode);
-        console.log(treeNode,'TREE NODE')
     }
 
     function getTreeObj(data,parentKey,key){
@@ -282,7 +282,6 @@ export const Session = () => {
                                         })
                                         el3.children = leafLeafLeaf;
                                         leafLeafLeaf = Object.assign([], []);
-                                        console.log(el3, 'EL 3')
                                     }
                                 })
                                 leafLeaf = Object.assign([],[]);
