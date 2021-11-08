@@ -53,8 +53,8 @@
     }
 
     &.login-page {
-        background: url("../images/pages/login-bg.jpg");
-        background-size: cover;
+        background: rgb(202,80,73);
+        background: radial-gradient(circle, rgba(202,80,73,1) 0%, rgba(24,36,47,1) 100%);
 
         .pages-panel {
             .pages-header {

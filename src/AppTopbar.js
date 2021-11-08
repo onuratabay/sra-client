@@ -71,7 +71,7 @@ const AppTopbar = (props) => {
         <div className="layout-topbar p-shadow-4">
             <div className="layout-topbar-left">
                 <button type="button" style={{ cursor: 'pointer' }} className="layout-topbar-logo p-link" onClick={() => history.push('/')}>
-                    <img id="app-logo" src="assets/layout/images/logo-light.svg" alt="ultima-layout" style={{ height: '2.25rem' }} />
+                    <img id="app-logo" src="assets/layout/images/logo.png" alt="SRA" style={{ height: '4rem' }} />
                 </button>
                 <button type="button" className="layout-menu-button p-shadow-6 p-link" onClick={props.onMenuButtonClick}>
                     <i className="pi pi-chevron-right"></i>

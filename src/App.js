@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { Route } from 'react-router-dom'
-
+import './assets/style.css';
 import AppTopbar from './AppTopbar';
 import AppBreadcrumb from "./AppBreadcrumb";
 import AppInlineMenu from './AppInlineMenu';
@@ -179,7 +179,7 @@ const App = () => {
             appLogoLink.src = 'assets/layout/images/logo-dark.svg';
         }
         else {
-            appLogoLink.src = 'assets/layout/images/logo-light.svg';
+            appLogoLink.src = 'assets/layout/images/logo2.png';
         }
     },[topbarTheme])
 

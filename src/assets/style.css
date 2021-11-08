@@ -1,0 +1,42 @@
+.layout-topbar-blue .layout-topbar {
+    color: #ffffff;
+    background: rgb(202,80,73);
+    background: linear-gradient(90deg, rgba(202,80,73,1) 0%, rgba(24,36,47,1) 35%);
+}
+.layout-topbar-blue .layout-topbar .layout-topbar-left{
+    background-color: unset;
+}
+.layout-menu-light .menu-wrapper .layout-menu-container .layout-menu > li > ul{
+    background-color: unset;
+}
+.layout-menu-light .menu-wrapper {
+    background: rgb(202,80,73);
+    background: linear-gradient(180deg, rgba(202,80,73,1) 0%, rgba(24,36,47,1) 100%);
+}
+.layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li a.router-link-active, .layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li button.router-link-active {
+    background: rgb(202,80,73);
+    background: linear-gradient(270deg, rgba(202,80,73,0.3) 0%, rgba(24,36,47,0.7) 100%);
+    color: #FFF;
+
+}
+.layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li a.router-link-active i, .layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li button.router-link-active i {
+    color:unset;
+}
+.layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li a, .layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li button {
+    color: #d8d8d8;
+}
+.layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li a i, .layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li button i {
+    color: #d8d8d8;
+}
+.layout-menu-light .menu-wrapper .layout-menu-container .layout-menu > li > div .layout-menuitem-text {
+    color: #bbb
+}
+.login-page .card {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+.pages-body .pages-panel.card{
+    padding: 2rem 4rem;
+    border: 1.5px solid #e4e4e469;
+    border-radius: 6px;
+}
