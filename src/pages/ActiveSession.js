@@ -4,17 +4,22 @@ import axios from "axios";
 import {DataTable} from "primereact/datatable";
 import {Button} from "primereact/button";
 import {useStore} from "react-hookstore";
+import {InputText} from "primereact/inputtext";
+import {FilterMatchMode} from "primereact/api";
 
 export const ActiveSession = () => {
     const [connectionTree, setConnectionTree] = useStore("connectionTree");
 
     const [activeSessions, setActiveSessions] = useState([]);
     const [selectedSessions, setSelectedSessions] = useState([]);
+    const [globalFilterValue, setGlobalFilterValue] = useState([]);
+    const [filters, setFilters] = useState(null);
 
 
 
     useEffect(() => {
         getActiveSessions();
+        initFilters1();
     },[]);
 
     useEffect(() => {
@@ -108,14 +113,45 @@ export const ActiveSession = () => {
     }
 
 
+    const renderHeader1 = () => {
+        return (
+            <div className="p-d-flex p-jc-between">
+                {/*<Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} />*/}
+                <span className="p-input-icon-left">
+                    <i className="pi pi-search" />
+                    <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Filter" />
+                </span>
+            </div>
+        )
+    }
 
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
+        let _filters1 = { ...filters };
+        _filters1['global'].value = value;
+
+        setFilters(_filters1);
+        setGlobalFilterValue(value);
+    }
+
+    const initFilters1 = () => {
+        setFilters({
+            'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        });
+        setGlobalFilterValue('');
+    }
+
+    const header = renderHeader1();
 
     return (
         <div className="p-grid">
             <div className="p-col-12">
                 <div className="card">
                     <h5>Current Connections</h5>
-                    <DataTable value={activeSessions} selection={selectedSessions} onSelectionChange={e => onSelectionChange(e)} dataKey="index" responsiveLayout="scroll">
+                    <DataTable value={activeSessions} selection={selectedSessions} onSelectionChange={e => onSelectionChange(e)} dataKey="index" paginator responsiveLayout="scroll" filters={filters} filterDisplay="menu"
+                               globalFilterFields={['username', 'connectionName', 'remoteHost']} header={header} emptyMessage="No active session found."
+                               paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                               currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={20} rowsPerPageOptions={[10,20,50]}>
                         <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                         <Column field="username" header="Username"></Column>
                         <Column field="startDate" header="Active since" body={dateTemplate}></Column>

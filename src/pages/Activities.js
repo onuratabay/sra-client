@@ -121,7 +121,7 @@ export const Activities = () => {
                 <div className="card">
                     <h5>Current Connections</h5>
                     <DataTable value={historyData}  dataKey="index" paginator responsiveLayout="scroll" filters={filters} filterDisplay="menu"
-                               globalFilterFields={['username', 'connectionName', 'representative.name', 'balance', 'remoteHost']} header={header} emptyMessage="No activities found."
+                               globalFilterFields={['username', 'connectionName', 'remoteHost']} header={header} emptyMessage="No activities found."
                                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={20} rowsPerPageOptions={[10,20,50]}>
                         <Column field="username" header="Username"></Column>
