@@ -119,7 +119,7 @@ export const Activities = () => {
         <div className="p-grid">
             <div className="p-col-12">
                 <div className="card">
-                    <h5>Active Connections</h5>
+                    <h5>Current Connections</h5>
                     <DataTable value={historyData}  dataKey="index" paginator responsiveLayout="scroll" filters={filters} filterDisplay="menu"
                                globalFilterFields={['username', 'connectionName', 'representative.name', 'balance', 'remoteHost']} header={header} emptyMessage="No activities found."
                                paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"

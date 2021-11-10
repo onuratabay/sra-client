@@ -114,7 +114,7 @@ export const ActiveSession = () => {
         <div className="p-grid">
             <div className="p-col-12">
                 <div className="card">
-                    <h5>Active Connections</h5>
+                    <h5>Current Connections</h5>
                     <DataTable value={activeSessions} selection={selectedSessions} onSelectionChange={e => onSelectionChange(e)} dataKey="index" responsiveLayout="scroll">
                         <Column selectionMode="multiple" headerStyle={{width: '3em'}}></Column>
                         <Column field="username" header="Username"></Column>

@@ -17,10 +17,10 @@ const AppBreadcrumb = (props) => {
     if (!activeRoute.length) {
         model = [{ label: '' }];
     } else {
-        model = activeRoute[0].parent === '' && activeRoute[0].label === '' ? [{ label: 'Dashboard' }] : [{ label: activeRoute[0].parent }, { label: activeRoute[0].label }]
+        model = activeRoute[0].parent === '' && activeRoute[0].label === '' ? [{ label: 'My Connection' }] : [{ label: activeRoute[0].parent }, { label: activeRoute[0].label }]
     }
 
-    const home = { icon: 'pi pi-home', url: '/' }
+    const home = { icon: 'pi pi-home', url: '/Session' }
 
     return (
         <div className="layout-breadcrumb-container p-d-flex p-jc-between p-ai-center p-shadow-1">
