@@ -4,10 +4,13 @@ import { Column } from 'primereact/column';
 import axios from "axios";
 import {createStore, useStore} from "react-hookstore";
 import {Button} from "primereact/button";
+import {InputText} from "primereact/inputtext";
 
 export const Session = () => {
 
     const [connectionTree, setConnectionTree] = useStore("connectionTree");
+    const [globalFilter1, setGlobalFilter1] = useState(null);
+
 
 
     useEffect(() => {
@@ -30,6 +33,23 @@ export const Session = () => {
 
 
     }, []);
+
+    const treeTableFuncMap = {
+        'globalFilter1': setGlobalFilter1
+    };
+
+    const getHeader = (globalFilterKey) => {
+        return (
+            <div className="p-text-right">
+                <div className="p-input-icon-left">
+                    <i className="pi pi-search"></i>
+                    <InputText type="search" onInput={(e) => treeTableFuncMap[`${globalFilterKey}`](e.target.value)} placeholder="Filter" size="50" />
+                </div>
+            </div>
+        );
+    }
+
+    let header = getHeader('globalFilter1');
 
 
     function onRowClick(e){
@@ -167,7 +187,7 @@ export const Session = () => {
             <div className="p-col-12">
                 <div className="card">
                     <h5>My Connection</h5>
-                    <TreeTable value={connectionTree} header="Sessions" onRowClick={(e)=>onRowClick(e)}>
+                    <TreeTable value={connectionTree} header="Sessions" onRowClick={(e)=>onRowClick(e)} globalFilter={globalFilter1} header={header}>
                         <Column field="name" header="Name" expander></Column>
                         <Column body={typeTemplate} header="Type"></Column>
                         <Column body={actionTemplate} header="Actions"></Column>
