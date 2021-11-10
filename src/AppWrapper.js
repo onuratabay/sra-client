@@ -6,6 +6,9 @@ import Error from "./pages/Error";
 import NotFound from "./pages/NotFound";
 import Access from "./pages/Access";
 import Landing from './pages/Landing';
+import {createStore} from "react-hookstore";
+
+createStore("redirectToLogin", false);
 
 const AppWrapper = (props) => {
 	let location = useLocation();

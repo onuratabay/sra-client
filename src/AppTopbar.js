@@ -1,20 +1,29 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import classNames from 'classnames';
 import { MegaMenu } from 'primereact/megamenu';
-import { useHistory } from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { CSSTransition } from 'react-transition-group';
 import { RTLContext } from './App';
+import axios from "axios";
+import {useStore} from "react-hookstore";
 
 const AppTopbar = (props) => {
 
     const isRTL = useContext(RTLContext);
     const history = useHistory();
+    const [redirectToLogin, setRedirectToLogin] = useStore("redirectToLogin");
+
+
 
     // Fixed for 6.1.0
     // eslint-disable-next-line
     const searchPanel = useRef(null)
+
+    useEffect(() => {
+
+    }, [])
 
     useEffect(() => {
         // Fixed for 6.1.0
@@ -31,6 +40,28 @@ const AppTopbar = (props) => {
             props.onSearch(false);
         }
     };
+
+    function logout(){
+        console.log('LOGOUT')
+        axios({
+            method: 'delete',
+            url: 'http://35.156.183.138:8080/guacamole/api/tokens/'+localStorage.getItem('token'),
+            params : {
+                'token': localStorage.getItem('token')
+            }
+        }).then(function (response) {
+            if(response.status===204){
+                localStorage.removeItem("token");
+                localStorage.removeItem('dataSource');
+                localStorage.removeItem('username');
+            }
+
+        }).catch((error) => {
+            console.log(error,'ERRR');
+        })
+        setRedirectToLogin(true);
+        // window.location.reload();
+    }
 
     const model = [
         {
@@ -66,6 +97,9 @@ const AppTopbar = (props) => {
             ]
         }
     ];
+
+    if (redirectToLogin)
+        return <Redirect push to="/login"/>
 
     return (
         <div className="layout-topbar p-shadow-4">
@@ -242,8 +276,8 @@ const AppTopbar = (props) => {
                                             <span>Support</span>
                                         </button>
                                     </li>
-                                    <li className="layout-topbar-action-item">
-                                        <button className="p-d-flex p-flex-row p-ai-center p-link">
+                                    <li className="layout-topbar-action-item" onClick={()=>logout()}>
+                                        <button className="p-d-flex p-flex-row p-ai-center p-link" >
                                             <i className={classNames('pi pi-power-off', { 'p-mr-2': !isRTL, 'p-ml-2': isRTL })}></i>
                                             <span>Logout</span>
                                         </button>

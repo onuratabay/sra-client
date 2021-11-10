@@ -4,17 +4,22 @@ import axios from "axios";
 import {DataTable} from "primereact/datatable";
 import {Button} from "primereact/button";
 import {useStore} from "react-hookstore";
+import {InputText} from "primereact/inputtext";
+import {FilterMatchMode} from "primereact/api";
 
 export const Activities = () => {
     const [connectionTree, setConnectionTree] = useStore("connectionTree");
 
     const [historyData, setHistoryData] = useState([]);
+    const [globalFilterValue, setGlobalFilterValue] = useState([]);
+    const [filters, setFilters] = useState(null);
     // const [selectedSessions, setSelectedSessions] = useState([]);
 
 
 
     useEffect(() => {
         getHistory();
+        initFilters1();
     },[]);
 
 
@@ -28,7 +33,17 @@ export const Activities = () => {
             }
         }).then(function (response) {
             if(response.status===200 && response.data){
-                setHistoryData(response.data);
+                let objValues = Object.values(response.data);
+
+                objValues?.forEach(function (el,index){
+                    el.index = index;
+                    let item = filterArr(connectionTree, el.connectionIdentifier);
+                    if(item?.length===1 && item[0]?.data?.name){
+                        el.connectionName = item[0]?.data?.name;
+                    }
+
+                })
+                setHistoryData(objValues);
             }
 
         }).catch((error) => {
@@ -36,31 +51,83 @@ export const Activities = () => {
         })
     }
 
+    function filterArr(arr, selectedKey) {
+        return arr.filter(item => Number(item.identifier) === Number(selectedKey) && Number(item?.data?.activeConnections)>0).map(item => {
+            item = Object.assign({}, item)
+            if (item.children) {
+                item.children = filterArr(item.children, selectedKey)
+            }
+            return item
+        })
+    }
+
+    function dateFormatFromEpoch(rowData){
+        return ((new Date(rowData.startDate)).toISOString().slice(0, 10) + ' ' + (new Date(rowData.startDate)).toLocaleTimeString());
+    }
+
     const dateTemplate = (rowData) => {
-        return rowData?((new Date(rowData.startDate)).toISOString().slice(0, 10) + ' ' + (new Date(rowData.startDate)).toLocaleTimeString()):null;
+        return rowData?dateFormatFromEpoch(rowData):null;
     }
 
     const durationTemplate = (rowData) => {
-        return rowData?((new Date(rowData.startDate)).toISOString().slice(0, 10) + ' ' + (new Date(rowData.startDate)).toLocaleTimeString()):null;
+        const sec = (((new Date(rowData.endDate))-(new Date(rowData.startDate))) / 1000);
+        if(sec<60){
+            return sec.toString()+' seconds';
+        }
+        else if(sec<3600){
+            return Number((sec/60).toFixed(1)).toString()+' minutes';
+
+        }
+        else{
+            return Number((sec/3600).toFixed(1)).toString()+' hours';
+
+        }
     }
 
-    const connectionNameTemplate = (rowData) => {
-        return rowData?((new Date(rowData.startDate)).toISOString().slice(0, 10) + ' ' + (new Date(rowData.startDate)).toLocaleTimeString()):null;
+
+    const renderHeader1 = () => {
+        return (
+            <div className="p-d-flex p-jc-between">
+                {/*<Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={clearFilter1} />*/}
+                <span className="p-input-icon-left">
+                    <i className="pi pi-search" />
+                    <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Filter" />
+                </span>
+            </div>
+        )
     }
 
+    const onGlobalFilterChange = (e) => {
+        const value = e.target.value;
+        let _filters1 = { ...filters };
+        _filters1['global'].value = value;
 
+        setFilters(_filters1);
+        setGlobalFilterValue(value);
+    }
 
+    const initFilters1 = () => {
+        setFilters({
+            'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
+        });
+        setGlobalFilterValue('');
+    }
+
+    const header = renderHeader1();
 
     return (
         <div className="p-grid">
             <div className="p-col-12">
                 <div className="card">
                     <h5>Active Connections</h5>
-                    <DataTable value={historyData}  dataKey="index" responsiveLayout="scroll">
+                    <DataTable value={historyData}  dataKey="index" paginator responsiveLayout="scroll" filters={filters} filterDisplay="menu"
+                               globalFilterFields={['username', 'connectionName', 'representative.name', 'balance', 'remoteHost']} header={header} emptyMessage="No activities found."
+                               paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                               currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" rows={20} rowsPerPageOptions={[10,20,50]}>
                         <Column field="username" header="Username"></Column>
                         <Column body={dateTemplate} header="Active since"></Column>
                         <Column body={durationTemplate} header="Duration"></Column>
-                        <Column body={connectionNameTemplate} header="Connection name"></Column>
+                        <Column field="connectionName" header="Connection name"></Column>
                         <Column field="remoteHost" header="Remote Host"></Column>
                     </DataTable>
                 </div>

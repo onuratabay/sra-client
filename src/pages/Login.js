@@ -11,14 +11,18 @@ import {Toast} from "primereact/toast";
 
 const Login = () => {
 
-    const [username, setUsername] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
 
 
 
     useEffect(() => {
-    toLogin();
+        return function cleanup() {
+            // setRedirect(false);
+            setUsername('');
+            setPassword('');
+        }
     },[]);
 
 	const history = useHistory();
@@ -31,14 +35,13 @@ const Login = () => {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 Authorization:
                     'Basic ' +
-                    Buffer.from(`${'guacadmin'}:${'guacadmin'}`, 'binary').toString('base64'),
+                    Buffer.from(`${username}:${password}`, 'binary').toString('base64'),
             }
         }).then(function (response) {
             if(response.status===200){
                 localStorage.setItem('token',response.data.authToken)
                 localStorage.setItem('dataSource',response.data.dataSource)
                 localStorage.setItem('username',response.data.username)
-                console.log('TESTTTTTTT')
                 setRedirect(true);
             }
         }).catch((error) => {
@@ -50,7 +53,7 @@ const Login = () => {
 		history.push('/');
 	}
 
-    if (redirect || localStorage.getItem('token')!== undefined)
+    if (redirect )
         return <Redirect push to="/"/>
 
 	return (
@@ -66,7 +69,7 @@ const Login = () => {
 								<i className="pi pi-envelope"></i>
 							</span>
 							<span className="p-inputgroup">
-                                <InputText type="text" id="inputgroup1" placeholder="Username" />
+                                <InputText type="text" id="inputgroup1"  placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
 							</span>
 						</div>
 
@@ -75,7 +78,7 @@ const Login = () => {
 								<i className="pi pi-lock"></i>
 							</span>
 							<span className="p-inputgroup">
-								<InputText type="password" id="inputgroup2" placeholder="Password" />
+								<InputText type="password" id="inputgroup2" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
 							</span>
 						</div>
 
@@ -85,7 +88,7 @@ const Login = () => {
                             <Checkbox inputId="binary"/>
                             <label htmlFor="binary">Remember me</label>
                         </div>
-                        <Button className="login-button p-mb-6 p-px-3 p-col-6 p-m-auto" label="Sign In"></Button>
+                        <Button className="login-button p-mb-6 p-px-3 p-col-6 p-m-auto" label="Sign In" onClick={()=>toLogin()}></Button>
 
                     </div>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { Route } from 'react-router-dom'
+import {Redirect, Route} from 'react-router-dom'
 import './assets/style.css';
 import AppTopbar from './AppTopbar';
 import AppBreadcrumb from "./AppBreadcrumb";
@@ -89,6 +89,10 @@ const App = () => {
     const [newThemeLoaded, setNewThemeLoaded] = useState(false);
     const [searchActive, setSearchActive] = useState(false)
     const [connectionTree, setConnectionTree] = useStore("connectionTree");
+    const [redirect, setRedirect] = useState(false);
+    const [redirectToLogin, setRedirectToLogin] = useStore("redirectToLogin");
+
+
 
     let currentInlineMenuKey = useRef(null);
 
@@ -160,6 +164,15 @@ const App = () => {
     ]
 
     useEffect(() => {
+        setRedirect(redirectToLogin);
+        // if(redirectToLogin)
+        //     window.location.reload();
+        return function cleanup() {
+            setRedirectToLogin(false)
+        }
+    }, [redirectToLogin])
+
+    useEffect(() => {
         if (menuMode === 'overlay') {
             hideOverlayMenu()
         }
@@ -170,21 +183,24 @@ const App = () => {
 
     useEffect(() => {
 
-        let connectionAndGroupUrl = 'http://35.156.183.138:8080/guacamole/api/session/data/' + localStorage.getItem('dataSource') + '/connectionGroups/ROOT/tree';
-        axios({
-            method: 'get',
-            url: connectionAndGroupUrl,
-            params: {
-                'token': localStorage.getItem('token')
-            }
-        }).then(function (response) {
-            if (response.status === 200 && response.data) {
-                treeList(response.data);
-            }
+        if(localStorage.getItem('token')) {
 
-        }).catch((error) => {
-            console.log(error, 'ERRR');
-        })
+            let connectionAndGroupUrl = 'http://35.156.183.138:8080/guacamole/api/session/data/' + localStorage.getItem('dataSource') + '/connectionGroups/ROOT/tree';
+            axios({
+                method: 'get',
+                url: connectionAndGroupUrl,
+                params: {
+                    'token': localStorage.getItem('token')
+                }
+            }).then(function (response) {
+                if (response.status === 200 && response.data) {
+                    treeList(response.data);
+                }
+
+            }).catch((error) => {
+                console.log(error, 'ERRR');
+            })
+        }
 
 
     }, []);
@@ -193,6 +209,22 @@ const App = () => {
         onColorModeChange(colorMode)
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+        const appLogoLink = document.getElementById('app-logo');
+
+        if(appLogoLink){
+            if (topbarTheme === 'white' || topbarTheme === 'yellow' || topbarTheme === 'amber' || topbarTheme === 'orange' || topbarTheme === 'lime') {
+                appLogoLink.src = 'assets/layout/images/logo-dark.svg';
+            }
+            else {
+                appLogoLink.src = 'assets/layout/images/logo2.png';
+            }
+        }
+        return function cleanup() {
+
+        }
+    },[topbarTheme])
+
     const onMenuThemeChange = (theme) => {
         setMenuTheme(theme)
     }
@@ -200,17 +232,6 @@ const App = () => {
     const onTopbarThemeChange = (theme) => {
         setTopbarTheme(theme);
     }
-
-    useEffect(() => {
-        const appLogoLink = document.getElementById('app-logo');
-
-        if (topbarTheme === 'white' || topbarTheme === 'yellow' || topbarTheme === 'amber' || topbarTheme === 'orange' || topbarTheme === 'lime') {
-            appLogoLink.src = 'assets/layout/images/logo-dark.svg';
-        }
-        else {
-            appLogoLink.src = 'assets/layout/images/logo2.png';
-        }
-    },[topbarTheme])
 
     const onThemeChange = (theme) => {
         setTheme(theme);
@@ -535,6 +556,9 @@ const App = () => {
         'p-ripple-disabled': !ripple,
         'layout-rtl': isRTL
     });
+
+    if (redirect)
+        return <Redirect push to="/login"/>
 
 
     return (

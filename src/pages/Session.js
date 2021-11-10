@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { NodeService } from '../service/NodeService';
 import axios from "axios";
 import {createStore, useStore} from "react-hookstore";
 import {Button} from "primereact/button";
@@ -13,21 +12,21 @@ export const Session = () => {
 
     useEffect(() => {
 
-        // let connectionAndGroupUrl = 'http://35.156.183.138:8080/guacamole/api/session/data/' + localStorage.getItem('dataSource') + '/connectionGroups/ROOT/tree';
-        // axios({
-        //     method: 'get',
-        //     url: connectionAndGroupUrl,
-        //     params: {
-        //         'token': localStorage.getItem('token')
-        //     }
-        // }).then(function (response) {
-        //     if (response.status === 200 && response.data) {
-        //         treList(response.data);
-        //     }
-        //
-        // }).catch((error) => {
-        //     console.log(error, 'ERRR');
-        // })
+        let connectionAndGroupUrl = 'http://35.156.183.138:8080/guacamole/api/session/data/' + localStorage.getItem('dataSource') + '/connectionGroups/ROOT/tree';
+        axios({
+            method: 'get',
+            url: connectionAndGroupUrl,
+            params: {
+                'token': localStorage.getItem('token')
+            }
+        }).then(function (response) {
+            if (response.status === 200 && response.data) {
+                treList(response.data);
+            }
+
+        }).catch((error) => {
+            console.log(error, 'ERRR');
+        })
 
 
     }, []);
