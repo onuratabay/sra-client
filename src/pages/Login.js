@@ -4,6 +4,7 @@ import { Button } from 'primereact/button';
 import { useHistory } from 'react-router-dom';
 import logo from "../assets/logo.png";
 import {Checkbox} from "primereact/checkbox";
+import {Toast} from "primereact/toast";
 
 const Login = () => {
 
@@ -12,7 +13,6 @@ const Login = () => {
 	const goDashboard = () => {
 		history.push('/');
 	}
-
 	return (
 		<div className="pages-body login-page p-d-flex p-flex-column">
 			<div className="p-as-center p-mt-auto p-mb-auto">
@@ -41,13 +41,14 @@ const Login = () => {
 
 					</div>
                     <div className="p-grid">
-                        <div className="p-field-checkbox p-col-6">
+                        <div className="p-field-checkbox p-col-6 p-m-auto">
                             <Checkbox inputId="binary"/>
-                            <label htmlFor="binary"></label>
+                            <label htmlFor="binary">Remember me</label>
                         </div>
-                        <Button className="login-button p-mb-6 p-px-3 p-col-6" label="Sign In"></Button>
+                        <Button className="login-button p-mb-6 p-px-3 p-col-6 p-m-auto" label="Sign In"></Button>
 
                     </div>
+
 
 				</div>
 			</div>

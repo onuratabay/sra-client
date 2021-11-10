@@ -1,7 +1,6 @@
 .layout-topbar-blue .layout-topbar {
     color: #ffffff;
     background: rgb(202,80,73);
-    background: linear-gradient(90deg, rgba(202,80,73,1) 0%, rgba(24,36,47,1) 35%);
 }
 .layout-topbar-blue .layout-topbar .layout-topbar-left{
     background-color: unset;
@@ -10,8 +9,7 @@
     background-color: unset;
 }
 .layout-menu-light .menu-wrapper {
-    background: rgb(202,80,73);
-    background: linear-gradient(180deg, rgba(202,80,73,1) 0%, rgba(24,36,47,1) 100%);
+    background: rgba(24,36,47,1);
 }
 .layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li a.router-link-active, .layout-menu-light .menu-wrapper .layout-menu-container .layout-menu li button.router-link-active {
     background: rgb(202,80,73);
@@ -33,10 +31,26 @@
 }
 .login-page .card {
     backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.9);
 }
 .pages-body .pages-panel.card{
     padding: 2rem 4rem;
     border: 1.5px solid #e4e4e469;
     border-radius: 6px;
+}
+.layout-topbar-blue .layout-topbar .layout-topbar-left .layout-menu-button{
+    background: rgba(24,36,47,1);
+    color: white;
+}
+.p-button:not(a):not(.p-disabled){
+    background: rgba(24,36,47,1);
+}
+.p-button:not(a):not(.p-disabled):hover{
+    background: rgba(24,36,47,0.85);
+}
+.p-button:not(a):not(.p-disabled):active{
+    background: rgba(24,36,47,0.85);
+}
+.p-button:enabled:focus{
+    background: rgba(24,36,47,0.85);
 }
