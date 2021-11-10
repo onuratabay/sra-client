@@ -4,184 +4,37 @@ import { Column } from 'primereact/column';
 import { NodeService } from '../service/NodeService';
 import axios from "axios";
 import {createStore, useStore} from "react-hookstore";
+import {Button} from "primereact/button";
 
-createStore("connectionTree", []);
 export const Session = () => {
 
     const [connectionTree, setConnectionTree] = useStore("connectionTree");
 
 
-    const datt = [
-                {
-                    "key": "0",
-                    "data":{
-                        "name":"Applications",
-                        "size":"100kb",
-                        "type":"Folder"
-                    },
-                    "children":[
-                        {
-                            "key": "0-0",
-                            "data":{
-                                "name":"React",
-                                "size":"25kb",
-                                "type":"Folder"
-                            },
-                            "children":[
-                                {
-                                    "key": "0-0-0",
-                                    "data":{
-                                        "name":"react.app",
-                                        "size":"10kb",
-                                        "type":"Application"
-                                    }
-                                },
-                                {
-                                    "key": "0-0-1",
-                                    "data":{
-                                        "name":"native.app",
-                                        "size":"10kb",
-                                        "type":"Application"
-                                    }
-                                },
-                                {
-                                    "key": "0-0-2",
-                                    "data":{
-                                        "name":"mobile.app",
-                                        "size":"5kb",
-                                        "type":"Application"
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "key": "0-1",
-                            "data":{
-                                "name":"editor.app",
-                                "size":"25kb",
-                                "type":"Application"
-                            }
-                        },
-                        {
-                            "key": "0-2",
-                            "data":{
-                                "name":"settings.app",
-                                "size":"50kb",
-                                "type":"Application"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "key": "1",
-                    "data":{
-                        "name":"Cloud",
-                        "size":"20kb",
-                        "type":"Folder"
-                    },
-                    "children":[
-                        {
-                            "key": "1-0",
-                            "data":{
-                                "name":"backup-1.zip",
-                                "size":"10kb",
-                                "type":"Zip"
-                            }
-                        },
-                        {
-                            "key": "1-1",
-                            "data":{
-                                "name":"backup-2.zip",
-                                "size":"10kb",
-                                "type":"Zip"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "key": "2",
-                    "data": {
-                        "name":"Desktop",
-                        "size":"150kb",
-                        "type":"Folder"
-                    },
-                    "children":[
-                        {
-                            "key": "2-0",
-                            "data":{
-                                "name":"note-meeting.txt",
-                                "size":"50kb",
-                                "type":"Text"
-                            }
-                        },
-                        {
-                            "key": "2-1",
-                            "data":{
-                                "name":"note-todo.txt",
-                                "size":"100kb",
-                                "type":"Text"
-                            }
-                        }
-                    ]
-                },
-
-            ];
-    let arrr=[
-        // {
-        //     "key": "0",
-        //     "data":{
-        //     },
-        //     "children":[
-        //
-        //     ]
-        // },
-    ];
     useEffect(() => {
 
-        axios({
-            method: 'post',
-            url: 'http://35.156.183.138:8080/guacamole/api/tokens',
-                headers : {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    Authorization:
-                        'Basic ' +
-                        Buffer.from(`${'guacadmin'}:${'guacadmin'}`, 'binary').toString('base64'),
-                }
-        }).then(function (response) {
-                if(response.status===200){
-                    localStorage.setItem('token',response.data.authToken)
-                    localStorage.setItem('dataSource',response.data.dataSource)
-                    localStorage.setItem('username',response.data.username)
+        // let connectionAndGroupUrl = 'http://35.156.183.138:8080/guacamole/api/session/data/' + localStorage.getItem('dataSource') + '/connectionGroups/ROOT/tree';
+        // axios({
+        //     method: 'get',
+        //     url: connectionAndGroupUrl,
+        //     params: {
+        //         'token': localStorage.getItem('token')
+        //     }
+        // }).then(function (response) {
+        //     if (response.status === 200 && response.data) {
+        //         treList(response.data);
+        //     }
+        //
+        // }).catch((error) => {
+        //     console.log(error, 'ERRR');
+        // })
 
-                    let connectionAndGroupUrl = 'http://35.156.183.138:8080/guacamole/api/session/data/'+response.data.dataSource+'/connectionGroups/ROOT/tree';
-                    axios({
-                        method: 'get',
-                        url: connectionAndGroupUrl,
-                        params : {
-                            'token': response.data.authToken
-                        }
-                    }).then(function (response) {
-                        if(response.status===200 && response.data){
-                            treList(response.data);
-                        }
 
-                    }).catch((error) => {
-                        console.log(error,'ERRR');
-                    })
-                }
-            }).catch((error) => {
-            console.log(error,'ERRR');
-        })
-
-    },[]);
+    }, []);
 
 
     function onRowClick(e){
         console.log(e.node)
-    }
-
-    function tree(root){
-
     }
 
     function treList(oldTree){
@@ -298,7 +151,17 @@ export const Session = () => {
         return treeNode;
     }
 
+    function typeTemplate(node,column){
+        return <div>
+            {node.data?.protocol ? node.data?.protocol : node.data?.type}
+        </div>;
+    }
 
+    function actionTemplate(node,column){
+        return <div>
+            {node.data?.protocol&&<Button type="button" icon="pi pi-arrow-circle-right" className="p-button-success" style={{ marginRight: '.5em' }}></Button>}
+        </div>;
+    }
 
     return (
         <div className="p-grid">
@@ -307,8 +170,8 @@ export const Session = () => {
                     <h5>Session</h5>
                     <TreeTable value={connectionTree} header="Sessions" onRowClick={(e)=>onRowClick(e)}>
                         <Column field="name" header="Name" expander></Column>
-                        <Column field="size" header="Size"></Column>
-                        <Column field="type" header="Type"></Column>
+                        <Column body={typeTemplate} header="Type"></Column>
+                        <Column body={actionTemplate} header="Actions"></Column>
                     </TreeTable>
                 </div>
             </div>

@@ -1,17 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { useHistory } from 'react-router-dom';
+import { useHistory,Redirect } from 'react-router-dom';
 import logo from "../assets/logo.png";
 import {Checkbox} from "primereact/checkbox";
+import axios from "axios";
+import {createStore} from "react-hookstore";
+
 
 const Login = () => {
 
+    const [username, setUsername] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [redirect, setRedirect] = useState(false);
+
+
+
+    useEffect(() => {
+    toLogin();
+    },[]);
+
 	const history = useHistory();
+
+	function toLogin(){
+        axios({
+            method: 'post',
+            url: 'http://35.156.183.138:8080/guacamole/api/tokens',
+            headers : {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                Authorization:
+                    'Basic ' +
+                    Buffer.from(`${'guacadmin'}:${'guacadmin'}`, 'binary').toString('base64'),
+            }
+        }).then(function (response) {
+            if(response.status===200){
+                localStorage.setItem('token',response.data.authToken)
+                localStorage.setItem('dataSource',response.data.dataSource)
+                localStorage.setItem('username',response.data.username)
+                console.log('TESTTTTTTT')
+                setRedirect(true);
+            }
+        }).catch((error) => {
+            console.log(error,'ERRR');
+        })
+    }
 
 	const goDashboard = () => {
 		history.push('/');
 	}
+
+    if (redirect || localStorage.getItem('token')!== undefined)
+        return <Redirect push to="/"/>
 
 	return (
 		<div className="pages-body login-page p-d-flex p-flex-column">
