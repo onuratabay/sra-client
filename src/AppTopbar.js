@@ -250,7 +250,7 @@ const AppTopbar = (props) => {
                         {/*    </CSSTransition>*/}
                         {/*</li>*/}
                         <li className="layout-topbar-item">
-                            <div><b>Ad Soyad</b></div>
+                            <div><b>{localStorage.getItem('username')}</b></div>
                         </li>
                         <li className="layout-topbar-item">
                             <button className="layout-topbar-action p-d-flex p-dir-row p-jc-center p-ai-center p-px-2 rounded-circle p-link" onClick={(event) => props.onTopbarItemClick({ originalEvent: event, item: 'profile' })}>
