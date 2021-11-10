@@ -9,6 +9,7 @@ import AppFooter from './AppFooter';
 import AppMenu from './AppMenu';
 import AppConfig from './AppConfig';
 import AppRightMenu from './AppRightMenu';
+import { Toast } from 'primereact/toast';
 
 import { Dashboard } from './components/Dashboard';
 import { DashboardAnalytics } from './components/DashboardAnalytics';
@@ -102,18 +103,19 @@ const App = () => {
         {
             label: 'Home', icon: 'pi pi-fw pi-home',
             items: [
-                { label: 'Session', icon: 'pi pi-fw pi-home', to: '/Session' },
-                { label: 'Active Session', icon: 'pi pi-fw pi-home', to: '/ActiveSession' },
-                { label: 'Activities', icon: 'pi pi-fw pi-home', to: '/Activities' },
+                { label: 'Connections', icon: 'pi pi-fw pi-bookmark', to: '/Session' },
+                { label: 'Active Connections', icon: 'pi pi-fw pi-home', to: '/ActiveSession' },
+
             ]
         },
         {
             label: 'Settings', icon: 'pi pi-fw pi-star',
             items: [
-                { label: 'Users', icon: 'pi pi-fw pi-id-card', to: '/Users' },
-                { label: 'Groups', icon: 'pi pi-fw pi-check-square', to: '/Groups' },
-                { label: 'Connection', icon: 'pi pi-fw pi-bookmark', to: '/Connection' },
-                { label: 'Preferences', icon: 'pi pi-fw pi-bookmark', to: '/Preferences' },
+                { label: 'Activities', icon: 'pi pi-fw pi-home', to: '/Activities' },
+                // { label: 'Users', icon: 'pi pi-fw pi-id-card', to: '/Users' },
+                // { label: 'Groups', icon: 'pi pi-fw pi-check-square', to: '/Groups' },
+                // { label: 'Connection', icon: 'pi pi-fw pi-bookmark', to: '/Connection' },
+                // { label: 'Preferences', icon: 'pi pi-fw pi-bookmark', to: '/Preferences' },
 
             ]
         },

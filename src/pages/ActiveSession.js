@@ -124,7 +124,7 @@ export const ActiveSession = () => {
                     </DataTable>
                 </div>
             </div>
-            <div><Button label="Kill Connections" onClick={onClickKillSession}></Button></div>
+            <div className="p-col-12 "><Button label="Kill Connections" onClick={onClickKillSession}></Button></div>
         </div>
     )
 }
