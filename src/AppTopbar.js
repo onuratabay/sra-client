@@ -34,31 +34,32 @@ const AppTopbar = (props) => {
 
     const model = [
         {
-            label: 'Home',
+            label: 'Connections',
             items: [
                 [
                     {
-                        label: 'Home',
+                        label: 'Connections',
                         items: [
-                            { label: 'Session', icon: 'pi pi-fw pi-id-card', command: () => { history.push('/Session') } },
-                            { label: 'Active Session', icon: 'pi pi-fw pi-check-square', command: () => { history.push('/ActiveSession') } },
-                            { label: 'Activities', icon: 'pi pi-fw pi-bookmark', command: () => { history.push('/Activities') } }
+                            { label: 'My Connection', icon: 'pi pi-fw pi-folder', command: () => { history.push('/Session') } },
+                            { label: 'Current Connection', icon: 'pi pi-fw pi-check-square', command: () => { history.push('/ActiveSession') } },
+
                         ]
                     }
                 ]
             ]
         },
         {
-            label: 'Settings',
+            label: 'Utilities',
             items: [
                 [
                     {
-                        label: 'Settings',
+                        label: 'Utilities',
                         items: [
-                            { label: 'Users', icon: 'pi pi-fw pi-desktop', command: () => { history.push('/Users') } },
-                            { label: 'Groups', icon: 'pi pi-fw pi-desktop', command: () => { history.push('/Groups') } },
-                            { label: 'Connection', icon: 'pi pi-fw pi-external-link', command: () => { history.push('/Connection') } },
-                            { label: 'Preferences', icon: 'pi pi-fw pi-external-link', command: () => { history.push('/Preferences') } }
+                            { label: 'Activities', icon: 'pi pi-fw pi-list', command: () => { history.push('/Activities') } }
+                            // { label: 'Users', icon: 'pi pi-fw pi-desktop', command: () => { history.push('/Users') } },
+                            // { label: 'Groups', icon: 'pi pi-fw pi-desktop', command: () => { history.push('/Groups') } },
+                            // { label: 'Connection', icon: 'pi pi-fw pi-external-link', command: () => { history.push('/Connection') } },
+                            // { label: 'Preferences', icon: 'pi pi-fw pi-external-link', command: () => { history.push('/Preferences') } }
                         ]
                     },
 
@@ -224,24 +225,24 @@ const AppTopbar = (props) => {
 
                             <CSSTransition classNames="p-toggleable" timeout={{ enter: 1000, exit: 450 }} in={props.activeTopbarItem === 'profile'} unmountOnExit>
                                 <ul className="layout-topbar-action-panel p-shadow-6">
-                                    <li className="layout-topbar-action-item">
-                                        <button className="p-d-flex p-flex-row p-ai-center p-link">
-                                            <i className={classNames('pi pi-cog', { 'p-mr-2': !isRTL, 'p-ml-2': isRTL })}></i>
-                                            <span>Settings</span>
-                                        </button>
-                                    </li>
-                                    <li className="layout-topbar-action-item">
-                                        <button className="p-d-flex p-flex-row p-ai-center p-link">
-                                            <i className={classNames('pi pi-file-o', { 'p-mr-2': !isRTL, 'p-ml-2': isRTL })} ></i>
-                                            <span>Terms of Usage</span>
-                                        </button>
-                                    </li>
-                                    <li className="layout-topbar-action-item ">
-                                        <button className="p-d-flex p-flex-row p-ai-center p-link">
-                                            <i className={classNames('pi pi-compass', { 'p-mr-2': !isRTL, 'p-ml-2': isRTL })}></i>
-                                            <span>Support</span>
-                                        </button>
-                                    </li>
+                                    {/*<li className="layout-topbar-action-item">*/}
+                                    {/*    <button className="p-d-flex p-flex-row p-ai-center p-link">*/}
+                                    {/*        <i className={classNames('pi pi-cog', { 'p-mr-2': !isRTL, 'p-ml-2': isRTL })}></i>*/}
+                                    {/*        <span>Settings</span>*/}
+                                    {/*    </button>*/}
+                                    {/*</li>*/}
+                                    {/*<li className="layout-topbar-action-item">*/}
+                                    {/*    <button className="p-d-flex p-flex-row p-ai-center p-link">*/}
+                                    {/*        <i className={classNames('pi pi-file-o', { 'p-mr-2': !isRTL, 'p-ml-2': isRTL })} ></i>*/}
+                                    {/*        <span>Terms of Usage</span>*/}
+                                    {/*    </button>*/}
+                                    {/*</li>*/}
+                                    {/*<li className="layout-topbar-action-item ">*/}
+                                    {/*    <button className="p-d-flex p-flex-row p-ai-center p-link">*/}
+                                    {/*        <i className={classNames('pi pi-compass', { 'p-mr-2': !isRTL, 'p-ml-2': isRTL })}></i>*/}
+                                    {/*        <span>Support</span>*/}
+                                    {/*    </button>*/}
+                                    {/*</li>*/}
                                     <li className="layout-topbar-action-item">
                                         <button className="p-d-flex p-flex-row p-ai-center p-link">
                                             <i className={classNames('pi pi-power-off', { 'p-mr-2': !isRTL, 'p-ml-2': isRTL })}></i>

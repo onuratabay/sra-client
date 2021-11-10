@@ -101,17 +101,17 @@ const App = () => {
 
     const menu = [
         {
-            label: 'Home', icon: 'pi pi-fw pi-home',
+            label: 'Connections', icon: 'pi pi-fw pi-home',
             items: [
-                { label: 'Connections', icon: 'pi pi-fw pi-bookmark', to: '/Session' },
-                { label: 'Active Connections', icon: 'pi pi-fw pi-home', to: '/ActiveSession' },
+                { label: 'My Connections', icon: 'pi pi-fw pi-folder', to: '/Session' },
+                { label: 'Current Connections', icon: 'pi pi-fw pi-folder-open', to: '/ActiveSession' },
 
             ]
         },
         {
-            label: 'Settings', icon: 'pi pi-fw pi-star',
+            label: 'Utilities', icon: 'pi pi-fw pi-star',
             items: [
-                { label: 'Activities', icon: 'pi pi-fw pi-home', to: '/Activities' },
+                { label: 'Activities', icon: 'pi pi-fw pi-list', to: '/Activities' },
                 // { label: 'Users', icon: 'pi pi-fw pi-id-card', to: '/Users' },
                 // { label: 'Groups', icon: 'pi pi-fw pi-check-square', to: '/Groups' },
                 // { label: 'Connection', icon: 'pi pi-fw pi-bookmark', to: '/Connection' },
@@ -148,7 +148,7 @@ const App = () => {
         { parent: 'Utilities', label: 'Spacing' },
         { parent: 'Utilities', label: 'Typography' },
         { parent: 'Utilities', label: 'Text' },
-        { parent: 'Pages', label: 'Crud' },
+        { parent: 'Pages', label: 'Session' },
         { parent: 'Pages', label: 'Calendar' },
         { parent: 'Pages', label: 'Timeline' },
         { parent: 'Pages', label: 'Invoice' },

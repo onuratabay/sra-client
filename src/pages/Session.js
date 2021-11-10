@@ -159,7 +159,7 @@ export const Session = () => {
 
     function actionTemplate(node,column){
         return <div>
-            {node.data?.protocol&&<Button type="button" icon="pi pi-arrow-circle-right" className="p-button-success" style={{ marginRight: '.5em' }}></Button>}
+            {node.data?.protocol&&<a className="p-button p-col" style={{background:"#18242FFF"}} href="">Connect</a>}
         </div>;
     }
 
@@ -167,7 +167,7 @@ export const Session = () => {
         <div className="p-grid">
             <div className="p-col-12">
                 <div className="card">
-                    <h5>Session</h5>
+                    <h5>My Connection</h5>
                     <TreeTable value={connectionTree} header="Sessions" onRowClick={(e)=>onRowClick(e)}>
                         <Column field="name" header="Name" expander></Column>
                         <Column body={typeTemplate} header="Type"></Column>

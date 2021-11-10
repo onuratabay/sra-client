@@ -55,7 +55,7 @@ export const Activities = () => {
         <div className="p-grid">
             <div className="p-col-12">
                 <div className="card">
-                    <h5>Active Connections</h5>
+                    <h5>Current Connections</h5>
                     <DataTable value={historyData}  dataKey="index" responsiveLayout="scroll">
                         <Column field="username" header="Username"></Column>
                         <Column body={dateTemplate} header="Active since"></Column>
