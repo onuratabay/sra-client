@@ -11,41 +11,10 @@ import AppConfig from './AppConfig';
 import AppRightMenu from './AppRightMenu';
 import { Toast } from 'primereact/toast';
 
-import { Dashboard } from './components/Dashboard';
-import { DashboardAnalytics } from './components/DashboardAnalytics';
-import { ButtonDemo } from './components/ButtonDemo';
-import { ChartDemo } from './components/ChartDemo';
-import { MessagesDemo } from './components/MessagesDemo';
 import { Documentation } from './components/Documentation';
-import { FileDemo } from './components/FileDemo';
-import { FormLayoutDemo } from './components/FormLayoutDemo';
-import { InputDemo } from './components/InputDemo';
-import { ListDemo } from './components/ListDemo';
-import { MiscDemo } from './components/MiscDemo';
-import { MenuDemo } from './components/MenuDemo';
-import { OverlayDemo } from './components/OverlayDemo';
-import { PanelDemo } from './components/PanelDemo';
-import { TableDemo } from './components/TableDemo';
-import { TreeDemo } from './components/TreeDemo';
-import { FloatLabelDemo } from './components/FloatLabelDemo';
-import { InvalidStateDemo } from './components/InvalidStateDemo';
-
-import { DisplayDemo } from './utilities/DisplayDemo';
-import { ElevationDemo } from './utilities/ElevationDemo';
-import { FlexBoxDemo } from './utilities/FlexboxDemo';
-import { GridDemo } from './utilities/GridDemo';
-import { IconsDemo } from './utilities/IconsDemo';
-import { SpacingDemo } from './utilities/SpacingDemo';
-import { TextDemo } from './utilities/TextDemo';
-import { TypographyDemo } from './utilities/TypographyDemo';
-import { WidgetsDemo } from './utilities/WidgetsDemo';
-
-import { Crud } from './pages/Crud';
 import { Calendar } from './pages/Calendar';
-import { EmptyPage } from './pages/EmptyPage';
 import { Invoice } from './pages/Invoice';
 import { Help } from './pages/Help';
-import { TimelineDemo } from './pages/TimelineDemo';
 
 import PrimeReact from 'primereact/api';
 
@@ -62,6 +31,7 @@ import {Preferences} from "./pages/Preferences";
 import {Connectionp} from "./pages/Connectionp";
 import {createStore, useStore} from "react-hookstore";
 import axios from "axios";
+import Login from "./pages/Login";
 
 export const RTLContext = React.createContext();
 
@@ -127,46 +97,19 @@ const App = () => {
 
     const routes = [
         { parent: '', label: '' },
-        { parent: 'Favorites', label: 'Dashboard Analytics' },
-        { parent: 'UI Kit', label: 'Form Layout' },
-        { parent: 'UI Kit', label: 'Input' },
-        { parent: 'UI Kit', label: 'Float Label' },
-        { parent: 'UI Kit', label: 'Invalid State' },
-        { parent: 'UI Kit', label: 'Button' },
-        { parent: 'UI Kit', label: 'Table' },
-        { parent: 'UI Kit', label: 'List' },
-        { parent: 'UI Kit', label: 'Panel' },
-        { parent: 'UI Kit', label: 'Tree' },
-        { parent: 'UI Kit', label: 'Overlay' },
-        { parent: 'UI Kit', label: 'Menu' },
-        { parent: 'UI Kit', label: 'Message' },
-        { parent: 'UI Kit', label: 'File' },
-        { parent: 'UI Kit', label: 'Chart' },
-        { parent: 'UI Kit', label: 'Misc' },
-        { parent: 'Utilities', label: 'Display' },
-        { parent: 'Utilities', label: 'Elevation' },
-        { parent: 'Utilities', label: 'Flexbox' },
-        { parent: 'Utilities', label: 'Icons' },
-        { parent: 'Utilities', label: 'Widgets' },
-        { parent: 'Utilities', label: 'Grid' },
-        { parent: 'Utilities', label: 'Spacing' },
-        { parent: 'Utilities', label: 'Typography' },
-        { parent: 'Utilities', label: 'Text' },
-        { parent: 'Pages', label: 'Session' },
-        { parent: 'Pages', label: 'Calendar' },
-        { parent: 'Pages', label: 'Timeline' },
-        { parent: 'Pages', label: 'Invoice' },
-        { parent: 'Pages', label: 'Login' },
-        { parent: 'Pages', label: 'Help' },
-        { parent: 'Pages', label: 'Empty' },
-        { parent: 'Pages', label: 'Access' },
-        { parent: 'Start', label: 'Documentation' }
+        { parent: 'Connections', label: 'My Connections' },
+        { parent: 'Connections', label: 'Current Connections' },
+        { parent: 'Utilities', label: 'Timeline' },
+        { parent: 'Utilities', label: 'Invoice' },
+        { parent: 'Utilities', label: 'Login' },
+        { parent: 'Utilities', label: 'Help' },
+        { parent: 'Utilities', label: 'Empty' },
     ]
 
     useEffect(() => {
         setRedirect(redirectToLogin);
-        // if(redirectToLogin)
-        //     window.location.reload();
+        if(redirectToLogin)
+            window.location.reload();
         return function cleanup() {
             setRedirectToLogin(false)
         }
@@ -558,7 +501,7 @@ const App = () => {
     });
 
     if (redirect)
-        return <Redirect push to="/login"/>
+        return <Redirect to="/login"/>
 
 
     return (
@@ -586,7 +529,7 @@ const App = () => {
                     <AppBreadcrumb routes={routes} />
 
                     <div className="layout-content">
-                        {/*<Route path="/" exact render={() => <Dashboard colorMode={colorMode} isNewThemeLoaded={newThemeLoaded} onNewThemeChange={e => setNewThemeLoaded(e)} />} />*/}
+                        <Route path="/" ></Route>
                         <Route path="/Session" component={Session} />
                         <Route path="/ActiveSession" component={ActiveSession} />
                         <Route path="/Activities" component={Activities} />
@@ -594,9 +537,9 @@ const App = () => {
                         <Route path="/Groups" component={Groups} />
                         <Route path="/Connection" component={Connectionp} />
                         <Route path="/Preferences" component={Preferences} />
+                        <Route path="/Calender" component={Calendar} />
                     </div>
 
-                    {/*<AppFooter colorMode={colorMode} />*/}
 
                 </div>
 

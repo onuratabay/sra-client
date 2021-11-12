@@ -40,7 +40,7 @@ export const Session = () => {
 
     const getHeader = (globalFilterKey) => {
         return (
-            <div className="p-text-right">
+            <div className="">
                 <div className="p-input-icon-left">
                     <i className="pi pi-search"></i>
                     <InputText type="search" onInput={(e) => treeTableFuncMap[`${globalFilterKey}`](e.target.value)} placeholder="Filter" size="50" />

@@ -17,7 +17,7 @@ const AppBreadcrumb = (props) => {
     if (!activeRoute.length) {
         model = [{ label: '' }];
     } else {
-        model = activeRoute[0].parent === '' && activeRoute[0].label === '' ? [{ label: 'My Connection' }] : [{ label: activeRoute[0].parent }, { label: activeRoute[0].label }]
+        model = activeRoute[0].parent === '' && activeRoute[0].label === '' ? [{ label: '' }] : [{ label: activeRoute[0].parent }, { label: activeRoute[0].label }]
     }
 
     const home = { icon: 'pi pi-home', url: '/Session' }
@@ -26,11 +26,6 @@ const AppBreadcrumb = (props) => {
         <div className="layout-breadcrumb-container p-d-flex p-jc-between p-ai-center p-shadow-1">
             <BreadCrumb model={model} home={home} className="layout-breadcrumb p-pl-4 p-py-2" />
 
-            {/*<div className="layout-breadcrumb-buttons p-d-flex p-ai-center p-pr-3">*/}
-            {/*    <Button type="button" icon="pi pi-cloud-upload" className="p-button p-button-rounded p-button-text p-button-plain p-mr-1"></Button>*/}
-            {/*    <Button type="button" icon="pi pi-bookmark" className="p-button p-button-rounded p-button-text p-button-plain p-mr-1"></Button>*/}
-            {/*    <Button type="button" icon="pi pi-power-off" className="p-button p-button-rounded p-button-text p-button-plain p-mr-1"></Button>*/}
-            {/*</div>*/}
         </div>
     );
 

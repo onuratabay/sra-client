@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { useHistory,Redirect } from 'react-router-dom';
@@ -6,7 +6,6 @@ import logo from "../assets/logo.png";
 import {Checkbox} from "primereact/checkbox";
 import axios from "axios";
 import {createStore} from "react-hookstore";
-
 import {Toast} from "primereact/toast";
 
 const Login = () => {
@@ -14,6 +13,10 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
+    const myToast = useRef(null);
+    const showToast = (severityValue, summaryValue, detailValue) => {
+        myToast.current.show({severity: severityValue, summary: summaryValue, detail: detailValue});
+    }
 
 
 
@@ -45,7 +48,7 @@ const Login = () => {
                 setRedirect(true);
             }
         }).catch((error) => {
-            console.log(error,'ERRR');
+            showToast('warn','Error Message','Please enter correct username and password')
         })
     }
 
@@ -95,6 +98,7 @@ const Login = () => {
 
 				</div>
 			</div>
+            <Toast ref={myToast} />
 		</div>
 	)
 }
