@@ -64,39 +64,11 @@ const AppTopbar = (props) => {
     }
 
     const model = [
-        {
-            label: 'Connections',
-            items: [
-                [
-                    {
-                        label: 'Connections',
-                        items: [
-                            { label: 'My Connection', icon: 'pi pi-fw pi-folder', command: () => { history.push('/Session') } },
-                            { label: 'Current Connection', icon: 'pi pi-fw pi-check-square', command: () => { history.push('/ActiveSession') } },
 
-                        ]
-                    }
-                ]
-            ]
-        },
-        {
-            label: 'Utilities',
-            items: [
-                [
-                    {
-                        label: 'Utilities',
-                        items: [
-                            { label: 'Activities', icon: 'pi pi-fw pi-list', command: () => { history.push('/Activities') } }
-                            // { label: 'Users', icon: 'pi pi-fw pi-desktop', command: () => { history.push('/Users') } },
-                            // { label: 'Groups', icon: 'pi pi-fw pi-desktop', command: () => { history.push('/Groups') } },
-                            // { label: 'Connection', icon: 'pi pi-fw pi-external-link', command: () => { history.push('/Connection') } },
-                            // { label: 'Preferences', icon: 'pi pi-fw pi-external-link', command: () => { history.push('/Preferences') } }
-                        ]
-                    },
+            { label: 'Home', command: () => { history.push('/Session') } },
+            { label: 'Utilities', command: () => { history.push('/ActiveSession') } }
 
-                ],
-            ]
-        }
+
     ];
 
     if (redirectToLogin)

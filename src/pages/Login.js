@@ -18,7 +18,20 @@ const Login = () => {
         myToast.current.show({severity: severityValue, summary: summaryValue, detail: detailValue});
     }
 
+    useEffect(() => {
+        const listener = event => {
+            if (event.code === "Enter" || event.code === "NumpadEnter") {
+                return toLogin();
+                event.preventDefault();
+                toLogin();
 
+            }
+        };
+        document.addEventListener("keydown", listener);
+        return () => {
+            document.removeEventListener("keydown", listener);
+        };
+    }, []);
 
     useEffect(() => {
         return function cleanup() {
@@ -50,6 +63,9 @@ const Login = () => {
         }).catch((error) => {
             showToast('warn','Error Message','Please enter correct username and password')
         })
+    }
+    function handleKeyDown(e) {
+            console.log('enter a basıldı');
     }
 
 	const goDashboard = () => {
@@ -91,7 +107,7 @@ const Login = () => {
                             <Checkbox inputId="binary"/>
                             <label htmlFor="binary">Remember me</label>
                         </div>
-                        <Button className="login-button p-mb-6 p-px-3 p-col-6 p-m-auto" label="Sign In" onClick={()=>toLogin()}></Button>
+                        <Button className="login-button p-mb-6 p-px-3 p-col-6 p-m-auto" label="Sign In" onClick={()=>toLogin()} onKeypress={()=>handleKeyDown()}></Button>
 
                     </div>
 

@@ -75,7 +75,7 @@ const App = () => {
 
     const menu = [
         {
-            label: 'Connections', icon: 'pi pi-fw pi-home',
+            label: 'connections', icon: 'pi pi-fw pi-home',
             items: [
                 { label: 'My Connections', icon: 'pi pi-fw pi-folder', to: '/Session' },
                 { label: 'Current Connections', icon: 'pi pi-fw pi-folder-open', to: '/ActiveSession' },
@@ -86,10 +86,10 @@ const App = () => {
             label: 'Utilities', icon: 'pi pi-fw pi-star',
             items: [
                 { label: 'Activities', icon: 'pi pi-fw pi-list', to: '/Activities' },
-                // { label: 'Users', icon: 'pi pi-fw pi-id-card', to: '/Users' },
-                // { label: 'Groups', icon: 'pi pi-fw pi-check-square', to: '/Groups' },
-                // { label: 'Connection', icon: 'pi pi-fw pi-bookmark', to: '/Connection' },
-                // { label: 'Preferences', icon: 'pi pi-fw pi-bookmark', to: '/Preferences' },
+                { label: 'Users', icon: 'pi pi-fw pi-id-card', to: '/Users' },
+                { label: 'Groups', icon: 'pi pi-fw pi-check-square', to: '/Groups' },
+                { label: 'Connection', icon: 'pi pi-fw pi-bookmark', to: '/Connection' },
+                { label: 'My Account', icon: 'pi pi-fw pi-bookmark', to: '/Preferences' },
 
             ]
         },
