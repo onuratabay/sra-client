@@ -65,7 +65,7 @@ const AppTopbar = (props) => {
 
     const model = [
 
-            { label: 'Home', command: () => { history.push('/Session') } },
+            { label: 'Home', command: () => { history.push('/MyConnection') } },
             { label: 'Utilities', command: () => { history.push('/ActiveSession') } }
 
 

@@ -6,10 +6,12 @@ import {createStore, useStore} from "react-hookstore";
 import {Button} from "primereact/button";
 import {InputText} from "primereact/inputtext";
 
-export const Session = () => {
+export const MyConnection = (props) => {
 
     const [connectionTree, setConnectionTree] = useStore("connectionTree");
     const [globalFilter1, setGlobalFilter1] = useState(null);
+
+    const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
 
 
 
@@ -117,6 +119,7 @@ export const Session = () => {
         obj.key = parentKey?.toString().length>0 ? parentKey.toString().concat('-').concat(key):key.toString();
         obj.identifier = data.identifier;
         obj.data = data;
+        obj.type = data?.protocol ? data?.protocol : data?.type;
         obj.children = list?.length>0 ? list : [];
         return obj;
     }
@@ -186,11 +189,13 @@ export const Session = () => {
         <div className="p-grid">
             <div className="p-col-12">
                 <div className="card">
-                    <h5>My Connection</h5>
-                    <TreeTable value={connectionTree} header="Sessions" onRowClick={(e)=>onRowClick(e)} globalFilter={globalFilter1} header={header}>
+                    {!props?.isChecked&&<h5>My Connection</h5>}
+                    <TreeTable value={connectionTree} header="Sessions" onRowClick={(e)=>onRowClick(e)}
+                               selectionMode={props?.isChecked?"checkbox":null} selectionKeys={selectedNodeKeys} onSelectionChange={e => setSelectedNodeKeys(e.value)}
+                               globalFilter={globalFilter1}  header={header}>
                         <Column field="name" header="Name" expander></Column>
-                        <Column body={typeTemplate} header="Type"></Column>
-                        <Column body={actionTemplate} header="Actions"></Column>
+                        {!props?.isChecked&&<Column field="type" body={typeTemplate} header="Type"></Column>}
+                        {!props?.isChecked&&<Column body={actionTemplate} header="Actions"></Column>}
                     </TreeTable>
                 </div>
             </div>

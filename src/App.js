@@ -22,7 +22,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './App.scss';
-import {Session} from "./pages/Session";
+import {MyConnection} from "./pages/MyConnection";
 import {ActiveSession} from "./pages/ActiveSession";
 import {Activities} from "./pages/Activities";
 import {Users} from "./pages/Users";
@@ -32,6 +32,7 @@ import {Connectionp} from "./pages/Connectionp";
 import {createStore, useStore} from "react-hookstore";
 import axios from "axios";
 import Login from "./pages/Login";
+import UserSave from "./pages/UserSave";
 
 export const RTLContext = React.createContext();
 
@@ -77,7 +78,7 @@ const App = () => {
         {
             label: 'connections', icon: 'pi pi-fw pi-home',
             items: [
-                { label: 'My Connections', icon: 'pi pi-fw pi-folder', to: '/Session' },
+                { label: 'My Connections', icon: 'pi pi-fw pi-folder', to: '/MyConnection' },
                 { label: 'Current Connections', icon: 'pi pi-fw pi-folder-open', to: '/ActiveSession' },
 
             ]
@@ -530,10 +531,11 @@ const App = () => {
 
                     <div className="layout-content">
                         <Route path="/" ></Route>
-                        <Route path="/Session" component={Session} />
+                        <Route path="/MyConnection" component={MyConnection} />
                         <Route path="/ActiveSession" component={ActiveSession} />
                         <Route path="/Activities" component={Activities} />
                         <Route path="/Users" component={Users} />
+                        <Route path="/saveUser" component={UserSave} />
                         <Route path="/Groups" component={Groups} />
                         <Route path="/Connection" component={Connectionp} />
                         <Route path="/Preferences" component={Preferences} />

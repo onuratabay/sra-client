@@ -27,7 +27,7 @@ export const Activities = () => {
     function getHistory(){
         axios({
             method: 'get',
-            url: 'http://35.156.183.138:8080/guacamole/api/session/data/'+localStorage.getItem('dataSource')+'/history/connections?contains=guac&order=-startDate',
+            url: 'http://35.156.183.138:8080/guacamole/api/session/data/'+localStorage.getItem('dataSource')+'/history/connections?order=-startDate',
             params : {
                 'token': localStorage.getItem('token')
             }

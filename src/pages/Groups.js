@@ -2,7 +2,7 @@ import React from 'react';
 import {Accordion, AccordionTab} from "primereact/accordion";
 import {InputText} from "primereact/inputtext";
 import {Checkbox} from "primereact/checkbox";
-import {Session} from "./Session";
+import {MyConnection} from "./MyConnection";
 
 export const Groups = () => {
 
@@ -92,7 +92,7 @@ export const Groups = () => {
                         </div>
                     </AccordionTab>
                     <AccordionTab header="CONNECTIONS">
-                        <Session />
+                        <MyConnection />
                     </AccordionTab>
                 </Accordion>
         </div>
